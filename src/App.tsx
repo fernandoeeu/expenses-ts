@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
+import AccountContext from "./store/context/AccountContext";
+import { accountReducer } from "./store/accountReducer";
+import { initialState } from "./store/common";
 
-function App() {
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import { Provider } from "./store/state2";
+
+// const Provider = AccountContext.Provider;
+// const Consumer = AccountContext.Consumer;
+
+const App: React.FC = () => {
+  const useAccountState = useReducer(accountReducer, initialState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // @ts-ignore
+    <Provider>
+      <div className="App">
+        <HomePage />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
